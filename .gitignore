@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+
+.codex
+.hf-cache/
+vendor/
+runs/
+
+data/ESC-50/
+data/clotho/
+data/releases/
+data/manifests/
+data/soundata/

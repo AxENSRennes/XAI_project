@@ -1,0 +1,5 @@
+{"caption":"A dog is barking while a man and woman are speaking.","counterfactual_caption":"A car engine is revving while a man and woman are speaking.","sources":["dog"],"replacements":{"dog":"car engine"}}
+{"caption":"Large group of people clapping.","counterfactual_caption":"Flock of birds chirping together.","sources":["people","clapping"],"replacements":{"people":"birds","clapping":"chirping"}}
+{"caption":"Idling car, train blows horn and passes.","counterfactual_caption":"Dogs barking, train blows horn and passes.","sources":["car"],"replacements":{"car":"dogs"}}
+{"caption":"Adults and children are walking and talking.","counterfactual_caption":"Cars and trucks are honking and passing.","sources":["adults","children","walking","talking"],"replacements":{"adults":"cars","children":"trucks","walking":"passing","talking":"honking"}}
+{"caption":"A crowd of people indoors talking.","counterfactual_caption":"A line of cars outdoors honking.","sources":["crowd","people","indoors","talking"],"replacements":{"crowd":"line","people":"cars","indoors":"outdoors","talking":"honking"}}
