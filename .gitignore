@@ -5,6 +5,9 @@ __pycache__/
 .hf-cache/
 vendor/
 runs/
+*.pt
+*.ckpt
+*.safetensors
 
 data/ESC-50/
 data/clotho/
