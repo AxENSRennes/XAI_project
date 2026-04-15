@@ -8,7 +8,7 @@ learning_rate: 1.0e-5
 weight_decay: 1.0e-4
 epochs: 1
 freeze_text: true
-freeze_audio: true
+freeze_audio: false
 clip_loss_weight: 1.0
 angle_loss_weight: 1.0
 factual_loss_weight: 100.0
