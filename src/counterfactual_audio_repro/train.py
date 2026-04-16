@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import random
 from pathlib import Path
+from tqdm import tqdm
 
 import numpy as np
 import torch
@@ -91,6 +92,7 @@ def train_model(
         train_dataset,
         batch_size=int(config["batch_size"]),
         shuffle=True,
+        drop_last=True,
         num_workers=int(config.get("num_workers", 0)),
         collate_fn=CounterfactualCollator(
             processor=processor,
@@ -123,8 +125,8 @@ def train_model(
     for epoch in range(1, int(config.get("epochs", 1)) + 1):
         model.train()
         running = {"loss": 0.0, "clip_loss": 0.0, "angle_loss": 0.0, "factual_loss": 0.0}
-
-        for batch in train_loader:
+        pbar = tqdm(train_loader, desc=f"Epoch {epoch}/{int(config.get('epochs', 1))}")
+        for batch in pbar:
             optimizer.zero_grad(set_to_none=True)
             outputs = model(
                 audio_inputs=_move_to_device(batch["audio_inputs"], device),
@@ -134,10 +136,15 @@ def train_model(
             outputs.loss.backward()
             optimizer.step()
 
-            running["loss"] += float(outputs.loss.item())
+            loss_val = float(outputs.loss.item())
+            running["loss"] += loss_val
+            pbar.set_postfix({"loss": f"{loss_val:.4f}"})
+            
             running["clip_loss"] += float(outputs.clip_loss.item())
             running["angle_loss"] += float(outputs.angle_loss.item())
             running["factual_loss"] += float(outputs.factual_loss.item())
+
+
 
         num_batches = max(len(train_loader), 1)
         epoch_metrics = {

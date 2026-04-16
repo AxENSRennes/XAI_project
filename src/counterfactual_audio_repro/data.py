@@ -102,6 +102,10 @@ class CounterfactualCollator:
             return_tensors="pt",
             padding=True,
         )
+        is_longer = audio_inputs.get("is_longer")
+        if isinstance(is_longer, torch.Tensor) and is_longer.numel() > 0 and int(is_longer.sum().item()) == 1:
+            # CLAP fused audio path can hit BatchNorm training errors with a single selected item.
+            audio_inputs["is_longer"] = torch.zeros_like(is_longer, dtype=torch.bool)
         factual_text_inputs = tokenizer(
             captions,
             return_tensors="pt",

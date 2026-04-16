@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
+from tqdm import tqdm 
 
 import numpy as np
 import torch
@@ -47,7 +48,7 @@ def collect_retrieval_embeddings(
     text_embeddings: list[torch.Tensor] = []
     counterfactual_text_embeddings: list[torch.Tensor] = []
 
-    for batch in loader:
+    for batch in tqdm(loader, desc="Collecting retrieval embeddings"):
         audio_inputs = _move_to_device(batch["audio_inputs"], device)
         factual_inputs = _move_to_device(batch["factual_text_inputs"], device)
         counterfactual_inputs = _move_to_device(batch["counterfactual_text_inputs"], device)

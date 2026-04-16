@@ -82,12 +82,27 @@ class CounterfactualClap(nn.Module):
             for key, value in inputs.items()
         }
 
+    @staticmethod
+    def _extract_feature_tensor(features: object) -> torch.Tensor:
+        if isinstance(features, torch.Tensor):
+            return features
+        for attr_name in ("audio_embeds", "text_embeds", "pooler_output", "last_hidden_state"):
+            candidate = getattr(features, attr_name, None)
+            if isinstance(candidate, torch.Tensor):
+                if attr_name == "last_hidden_state" and candidate.ndim >= 2:
+                    return candidate[:, 0]
+                return candidate
+        if isinstance(features, (tuple, list)) and features and isinstance(features[0], torch.Tensor):
+            return features[0]
+        raise TypeError(f"Unsupported feature output type: {type(features)}")
+
     def encode_audio(self, audio_inputs: dict[str, torch.Tensor]) -> torch.Tensor:
         if self.freeze_audio:
             with torch.no_grad():
                 features = self.backbone.get_audio_features(**audio_inputs)
         else:
             features = self.backbone.get_audio_features(**audio_inputs)
+        features = self._extract_feature_tensor(features)
         return F.normalize(self.audio_adapter(features), dim=-1)
 
     def encode_text(self, text_inputs: dict[str, torch.Tensor]) -> torch.Tensor:
@@ -96,6 +111,7 @@ class CounterfactualClap(nn.Module):
                 features = self.backbone.get_text_features(**text_inputs)
         else:
             features = self.backbone.get_text_features(**text_inputs)
+        features = self._extract_feature_tensor(features)
         return F.normalize(self.text_adapter(features), dim=-1)
 
     def compute_similarity(self, audio_embeddings: torch.Tensor, text_embeddings: torch.Tensor) -> torch.Tensor:

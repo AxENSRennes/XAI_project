@@ -1,0 +1,16 @@
+seed: 7
+model_name: laion/clap-htsat-fused
+sample_rate: 48000
+clip_duration_s: 10.0
+batch_size: 32
+num_workers: 4
+learning_rate: 1.0e-5
+weight_decay: 1.0e-4
+epochs: 3
+freeze_text: true
+freeze_audio: false
+clip_loss_weight: 1.0
+angle_loss_weight: 1.0
+factual_loss_weight: 0.0
+margin: 0.1
+label_template: "this is a sound of {}"
