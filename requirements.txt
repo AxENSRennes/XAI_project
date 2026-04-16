@@ -4,4 +4,6 @@ soundfile>=0.12
 torch>=2.8
 torchaudio>=2.8
 transformers>=4.57
-
+matplotlib
+scikit-learn
+seaborn
