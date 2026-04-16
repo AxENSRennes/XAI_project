@@ -1,22 +1,3 @@
-"""
-Experiment 2: Symmetric audio-to-text vs text-to-audio retrieval.
-
-For each model configuration, computes both directions of Recall@k:
-  - Text→Audio (T2A): for each text query, rank all audio clips and find
-    the matching clip.
-  - Audio→Text (A2T): for each audio clip, rank all text queries and check
-    whether at least one of its correct captions appears in the top-k.
-
-Produces two panels side-by-side for each direction, comparing all configs.
-Saves to figures/audio_to_text_retrieval.png.
-
-Usage:
-  python scripts/plot_audio_to_text_retrieval.py \
-      --manifest data/manifests/clotho_val.jsonl \
-      [--output-dir outputs] \
-      [--out figures/audio_to_text_retrieval.png]
-"""
-
 from __future__ import annotations
 
 import argparse
@@ -85,7 +66,6 @@ def compute_both_directions(
     # Index maps
     audio_index = {p: i for i, p in enumerate(audio_paths)}   # path -> col index
 
-    # ── Text→Audio ──────────────────────────────────────────────────────────
     t2a_rankings = torch.argsort(sim, dim=1, descending=True)  # (n_queries, n_audio)
     t2a_hits = [0] * K_MAX
     for q_idx, q_path in enumerate(text_paths):
@@ -97,7 +77,6 @@ def compute_both_directions(
     n_queries = len(text_paths)
     t2a_recalls = [h / n_queries for h in t2a_hits]
 
-    # ── Audio→Text ──────────────────────────────────────────────────────────
     # Build map: audio_path -> list of text row indices (its captions)
     from collections import defaultdict
     audio_to_text_rows: dict[str, list[int]] = defaultdict(list)

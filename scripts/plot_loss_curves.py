@@ -55,7 +55,6 @@ def main() -> None:
         ax_loss.plot(epochs, train_loss, marker="o", color=color, label=label, linewidth=1.8)
         ax_top1.plot(epochs, eval_top1,  marker="o", color=color, label=label, linewidth=1.8)
 
-    # --- left panel: training loss ---
     ax_loss.set_title("Training loss", fontsize=11, fontweight="bold", pad=8)
     ax_loss.set_xlabel("Epoch", fontsize=10)
     ax_loss.set_ylabel("Total train loss", fontsize=10)
@@ -63,7 +62,6 @@ def main() -> None:
     ax_loss.legend(fontsize=8, framealpha=0.7)
     sns.despine(ax=ax_loss)
 
-    # --- right panel: eval Top-1 ---
     ax_top1.set_title("Retrieval Top-1 (Clotho val)", fontsize=11, fontweight="bold", pad=8)
     ax_top1.set_xlabel("Epoch", fontsize=10)
     ax_top1.set_ylabel("Top-1 accuracy", fontsize=10)
