@@ -1,14 +1,3 @@
-"""
-Recall@k curve for k = 1 to 10, for all 4 ablation configurations.
-
-Produces: figures/recall_at_k.png
-
-Usage:
-  python scripts/plot_recall_at_k.py \
-      --manifest data/manifests/clotho_val.jsonl \
-      [--output-dir outputs] [--out figures/recall_at_k.png]
-"""
-
 from __future__ import annotations
 
 import argparse

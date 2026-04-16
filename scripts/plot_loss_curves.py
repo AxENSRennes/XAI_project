@@ -1,11 +1,3 @@
-"""
-Plot training loss curves and eval Top-1 for the 4 ablation configs.
-Produces: figures/loss_curves.png
-
-Usage:
-  python scripts/plot_loss_curves.py [--output-dir outputs] [--out figures/loss_curves.png]
-"""
-
 from __future__ import annotations
 
 import argparse

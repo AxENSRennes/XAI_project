@@ -1,16 +1,3 @@
-"""
-t-SNE visualisation of audio, factual-text and counterfactual-text embeddings,
-before (pretrained baseline) and after (full model) training.
-Produces: figures/tsne_before_after.png
-
-Usage:
-  python scripts/plot_tsne.py \
-      --baseline  outputs/pretrained_baseline/best.pt \
-      --full      outputs/ablation_full/best.pt \
-      --manifest  data/manifests/clotho_val.jsonl \
-      [--n-samples 300] [--out figures/tsne_before_after.png]
-"""
-
 from __future__ import annotations
 
 import argparse

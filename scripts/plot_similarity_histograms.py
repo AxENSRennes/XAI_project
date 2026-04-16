@@ -1,22 +1,3 @@
-"""
-Generate a publication-quality cosine similarity histogram figure.
-
-For each of two checkpoints (baseline and full model), it computes:
-  - sim(audio, factual_text)       for every matched (audio, caption) pair
-  - sim(audio, counterfactual_text) for the same pairs
-
-Then it draws a 1×2 panel figure:
-  Left  → pre-trained CLAP (no fine-tuning)
-  Right → full model (w1=1, w2=100)
-
-Usage:
-  python scripts/plot_similarity_histograms.py \
-      --baseline  outputs/pretrained_baseline/best.pt \
-      --full      outputs/ablation_full/best.pt \
-      --manifest  data/manifests/clotho_val.jsonl \
-      --out       figures/similarity_histograms.png
-"""
-
 from __future__ import annotations
 
 import argparse

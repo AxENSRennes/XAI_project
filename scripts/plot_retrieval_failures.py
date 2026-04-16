@@ -1,18 +1,3 @@
-"""
-Qualitative retrieval failure analysis.
-
-Finds Top-1 retrieval failures for a given checkpoint, then displays a
-figure showing: query caption | correct clip | retrieved clip + its caption.
-
-Produces: figures/retrieval_failures.png
-
-Usage:
-  python scripts/plot_retrieval_failures.py \
-      --checkpoint outputs/ablation_full/best.pt \
-      --manifest   data/manifests/clotho_val.jsonl \
-      [--n-examples 5] [--out figures/retrieval_failures.png]
-"""
-
 from __future__ import annotations
 
 import argparse

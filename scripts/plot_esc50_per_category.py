@@ -1,19 +1,3 @@
-"""
-Per-category ESC-50 zero-shot accuracy comparison.
-
-Compares the pre-trained CLAP baseline against the full fine-tuned model
-for every ESC-50 category, and shows which categories improve or regress.
-
-Produces: figures/esc50_per_category.png
-
-Usage:
-  python scripts/plot_esc50_per_category.py \
-      --baseline  outputs/pretrained_baseline/best.pt \
-      --no-cf     outputs/ablation_no_cf/best.pt \
-      --full      outputs/ablation_full/best.pt \
-      --manifest  data/manifests/esc50.jsonl
-"""
-
 from __future__ import annotations
 
 import argparse
